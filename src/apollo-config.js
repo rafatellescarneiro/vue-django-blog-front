@@ -1,12 +1,9 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-} from "@apollo/client/core";
+import {ApolloClient, InMemoryCache, createHttpLink} from "@apollo/client/core";
 import { createApolloProvider } from "@vue/apollo-option";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from 'apollo-upload-client'
 
-const httpLink = createUploadLink({
+const httpLink = createHttpLink({
   uri: "http://127.0.0.1:8000/graphql",
 });
 
@@ -30,3 +27,10 @@ export const apolloClient = new ApolloClient({
 export const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
 });
+
+const cache = new InMemoryCache()
+
+const apolloClient = new ApolloClient({
+  link: httpLink,
+  cache,
+})

@@ -3,9 +3,17 @@
     <div class="flex flex-col justify-between h-screen">
       <header class="flex flex-row items-center justify-between py-10">
         <div class="nav-logo text-2xl font-bold">
-          <router-link to="/" v-if="this.mySite">{{ this.mySite.name }}</router-link>
+          <router-link to="/"
+           v-if="this.mySite"
+           >{{ this.mySite.name }}</router-link>
         </div>
         <div class="nav-links hidden sm:block">
+          <div class="nav-logo text-2xl font-bold">
+            <router-link
+             to="/" 
+             v-if="mySite"
+             >{{ mySite.name }}</router-link>
+          </div>
           <router-link
             to="/"
             class="mx-2 font-sans font-medium hover:underline hover:text-teal-700"
@@ -133,6 +141,7 @@
 <script>
 import { SITE_INFO } from "@/queries";
 import { useUserStore } from "@/stores/user";
+
 export default {
   setup() {
     const userStore = useUserStore();
